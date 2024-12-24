@@ -1,0 +1,54 @@
+nav {
+    background-color: #007bff;
+    /* Color de fondo de la barra de navegación */
+    padding: 1rem;
+    /* Espaciamiento alrededor de la barra */
+}
+
+nav ul {
+    list-style-type: none;
+    /* Quitar el estilo de lista en el ul */
+    padding: 0;
+    /* Quitar el padding */
+    margin: 0;
+    /* Quitar el margen */
+    display: flex;
+    /* Mostrar elementos en fila */
+    gap: 20px;
+    /* Espaciado entre elementos */
+}
+
+nav li {
+    display: inline;
+    /* Mostrar los li en línea */
+}
+
+nav a {
+    color: white;
+    /* Color de texto para los enlaces */
+    text-decoration: none;
+    /* Quitar el subrayado de los enlaces */
+    font-weight: bold;
+    /* Negrita para el texto del enlace */
+}
+
+nav a:hover {
+    text-decoration: underline;
+    /* Subrayar en hover */
+}
+
+nav button {
+    background-color: transparent;
+    /* Fondo transparente para el botón */
+    color: white;
+    /* Color de texto blanco para el botón */
+    border: none;
+    /* Eliminar el borde */
+    cursor: pointer;
+    /* Cambiar el cursor al pasar por encima */
+}
+
+nav button:hover {
+    text-decoration: underline;
+    /* Subrayar el texto en hover */
+}
