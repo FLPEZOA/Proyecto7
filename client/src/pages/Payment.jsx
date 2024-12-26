@@ -11,6 +11,7 @@ const Payment = (cart) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [name, setName] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,7 +77,7 @@ const Payment = (cart) => {
                             borderRadius: '5px',
                             padding: '0.5em',
                             marginBottom: '1em'
-                        }} // Estilo de entrada
+                        }} 
                     />
                 </div>
                 <div>
