@@ -1,60 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 const Cart = () => {
-    const [cart, setCart] = useState(null);
+    const { state: { cart }, dispatch } = useCart();
+    const navigate = useNavigate();
     const { token } = useAuth(); // Obtener el token de autenticación
 
-    useEffect(() => {
-        const fetchCart = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart`); // Verifica que la ruta sea correcta
-                setCart(response.data); // Asumimos que la respuesta es la lista del carrito
-            } catch (error) {
-                console.error('Error al obtener el carrito:', error.response ? error.response.data : error.message);
-                setError('No se pudo obtener el carrito.');
-            }
-        };
-
-        fetchCart();
-    }, [token]);
-
     const removeFromCart = async (productId) => {
-        try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/cart/remove`, { productId }, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            // Actualizar el carrito después de eliminar
-            setCart(prevCart => ({
-                ...prevCart,
-                products: prevCart.products.filter(item => item.productId._id !== productId),
-            }));
-        } catch (error) {
-            console.error('Error al eliminar del carrito:', error);
-        }
+        dispatch({ type: 'REMOVE_FROM_CART', payload: productId })
+    };
+
+    const handleCheckout = () => {
+        navigate('/payment'); // Redirigir al componente de pago
     };
 
     if (!cart) return <div>Cargando carrito...</div>;
 
     return (
-        <div>
+        <div style={{ backgroundColor: 'var(--color-bg)', padding: '1rem' }}>
             <h1>Tu Carrito</h1>
-            {cart.products.length === 0 ? (
-                <p>El carrito está vacío.</p>
+            {cart.length === 0 ? (
+                <p style={{ color: 'var(--color-text)' }}>El carrito está vacío.</p>
             ) : (
-                <ul>
-                    {cart.products.map(item => (
-                        <li key={item.productId._id}>
-                            <h3>{item.productId.name}</h3>
-                            <p>Precio: ${item.productId.price / 100}</p>
-                            <p>Cantidad: {item.quantity}</p>
-                            <button onClick={() => removeFromCart(item.productId._id)}>Eliminar</button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+                <>
+                    <ul>
+                        {cart.map(item => (
+                            <li key={item._id} style={{ color: 'var(--color-text)' }}>
+                                <h3>{item.name}</h3>
+                                <p>Precio: ${(item.price)}</p>
+                                <p>Cantidad: {item.quantity}</p>
+                                <button onClick={() => removeFromCart(item._id)}>Eliminar</button>
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={handleCheckout} className="btn btn-primary">Proceder a Pagar</button> {/* Botón de Checkout */}
+                </>
+            )
+            }
+        </div >
     );
 };
 

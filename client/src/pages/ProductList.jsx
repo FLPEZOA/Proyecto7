@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductItem from '../components/ProductItem';
+import { useCart } from '../context/CartContext';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const { state: { cart }, dispatch } = useCart();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -25,7 +26,7 @@ const ProductList = () => {
     }, []);
 
     const handleAddToCart = (product) => {
-        setCart((prevCart) => [...prevCart, product]);
+        dispatch({ type: 'ADD_TO_CART', payload: product });
         alert(`${product.name} ha sido agregado al carrito!`);
     };
 
@@ -33,11 +34,11 @@ const ProductList = () => {
     if (error) return <p style={{ color: 'red' }}>{error}</p>; // Mostrar error
 
     return (
-        <div className="container">
-            <h1 className="my-4">Lista de Productos</h1>
-            <div className="row">
+        <div className="container mx-auto px-4">
+            <h1 className="my-4 text-center">Lista de Productos</h1>
+            <div className="flex flex-wrap -mx-4"> {/* Usa Flexbox */}
                 {products.map(product => (
-                    <div className="col-md-4" key={product._id}>
+                    <div className="col-md-4 px-4 mb-8" key={product._id}>
                         <ProductItem product={product} onAdd={handleAddToCart} />
                     </div>
                 ))}

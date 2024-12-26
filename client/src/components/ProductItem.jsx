@@ -4,14 +4,16 @@ import Card from 'react-bootstrap/Card';
 
 const ProductItem = ({ product, onAdd }) => {
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={product.imageUrl} alt={product.name} />
+        <Card style={{
+            width: '18rem', borderColor: 'var(--color-text) '
+        }}>
+            < Card.Img variant="top" src={product.imageUrl} alt={product.name} />
             <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-                <Card.Text>Precio: ${(product.price / 100).toFixed(2)}</Card.Text>
-                <Button variant="primary" onClick={() => onAdd(product)}>Agregar al Carrito</Button>
+                <Card.Title style={{ color: 'var(--color-text)' }}>{product.name}</Card.Title>
+                <Card.Text>Precio: ${(product.price)}</Card.Text>
+                <Button variant="primary" style={{ backgroundColor: 'var(--color-button)' }} onClick={() => onAdd(product)}>Agregar al Carrito</Button>
             </Card.Body>
-        </Card>
+        </Card >
     );
 };
 export default ProductItem;

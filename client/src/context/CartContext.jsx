@@ -3,20 +3,30 @@ import React, { createContext, useReducer } from 'react';
 const CartContext = createContext();
 
 const initialState = {
-    cart: [],
+    cart: JSON.parse(localStorage.getItem('carrito') ?? "[]"),
 };
 
 const cartReducer = (state, action) => {
     switch (action.type) {
-        case 'ADD_TO_CART':
-            return { ...state, cart: [...state.cart, action.payload] };
-        case 'REMOVE_FROM_CART':
-            return {
+        case 'ADD_TO_CART': {
+            const value = { ...state, cart: [...state.cart, action.payload] };
+            localStorage.setItem('carrito', JSON.stringify(value.cart));
+            return value;
+        }
+        case 'REMOVE_FROM_CART': {
+            const value = {
                 ...state,
-                cart: state.cart.filter(item => item.id !== action.payload.id)
+                cart: state.cart.filter(item => item._id !== action.payload)
             };
-        case 'CLEAR_CART':
-            return { ...state, cart: [] };
+            localStorage.setItem('carrito', JSON.stringify(value.cart));
+            return value;
+        }
+        case 'CLEAR_CART': {
+
+            const value = { ...state, cart: [] };
+            localStorage.setItem('carrito', JSON.stringify(value.cart));
+            return value;
+        }
         default:
             return state;
     }
