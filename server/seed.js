@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const Product = require('./models/Product'); // Ajusta la ruta según tu estructura
+import mongoose from 'mongoose';
+import Product from './models/Product';
+
 require('dotenv').config(); // Cargar variables de entorno
 
 

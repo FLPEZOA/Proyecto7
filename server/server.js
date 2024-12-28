@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config(); // Cargar las variables del archivo .env
 
+import path from "path";
+import { fileURLToPath } from "url";
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -18,8 +20,6 @@ const router = express.Router();
 app.use(cors());
 app.use(express.json()); // Permitir que el servidor entienda solicitudes JSON
 
-
-
 // Conectar a MongoDB usando la URI proporcionada en el archivo .env
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -28,6 +28,10 @@ mongoose.connect(process.env.MONGODB_URI, {
     .then(() => console.log('Base de datos conectada')) // Mensaje de éxito al conectar
     .catch(err => console.error('Error de conexión a la base de datos', err)); // Mensaje de error al conectar
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Usar las rutas
 router.use('/api/users', userRoutes); // Rutas para la gestión de usuarios
 router.use('/api/products', productRoutes); // Rutas para la gestión de productos
@@ -35,7 +39,7 @@ router.use('/api/payments', paymentRoutes); // Rutas para la gestión de pagos
 router.use('/api/cart', cartRoutes); // Rutas para la gestión del carrito
 
 // Ruta para crear un Payment Intent
-app.post('/create-payment-intent', async (req, res) => {
+router.post('/create-payment-intent', async (req, res) => {
     const { amount } = req.body; // Obtener la cantidad del cuerpo de la solicitud
 
     try {
@@ -48,6 +52,11 @@ app.post('/create-payment-intent', async (req, res) => {
         console.error(error); // Mostrar el error en la consola para depuración
         res.status(500).send({ error: error.message }); // Enviar error al cliente
     }
+});
+
+router.use(express.static(path.join(__dirname, "../client/dist")));
+router.get("*", (req, res) => {
+    return res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 export { app, router };

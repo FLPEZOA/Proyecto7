@@ -36,11 +36,9 @@ const ProductList = () => {
     return (
         <div className="container mx-auto px-4">
             <h1 className="my-4 text-center">Lista de Productos</h1>
-            <div className="flex flex-wrap -mx-4"> {/* Usa Flexbox */}
+            <div className="grid grild-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 -mx-4"> {/* Usa Flexbox */}
                 {products.map(product => (
-                    <div className="col-md-4 px-4 mb-8" key={product._id}>
-                        <ProductItem product={product} onAdd={handleAddToCart} />
-                    </div>
+                    <ProductItem product={product} onAdd={handleAddToCart} key={product._id} />
                 ))}
             </div>
 

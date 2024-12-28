@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 const ProductItem = ({ product, onAdd }) => {
     return (
         <Card style={{
-            width: '18rem', borderColor: 'var(--color-text) '
+            borderColor: 'var(--color-text) '
         }}>
             < Card.Img variant="top" src={product.imageUrl} alt={product.name} />
             <Card.Body>
