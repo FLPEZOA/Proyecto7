@@ -78,7 +78,7 @@
 1. **Ejecuta el servidor**:
     ```bash
     cd server
-    node server.js
+    node index.js
     ```
 
 2. **Ejecuta la aplicación del cliente**:
@@ -87,16 +87,8 @@
     npm start
     ```
 
-3. **Abre tu navegador** y ve a `http://localhost:3000` para ver la aplicación.
+3. **Abre tu navegador** y ve a `proyecto7-qufc.vercel.app` para ver la aplicación.
 
-## Contribución
 
-¡Contribuciones son bienvenidas! Si tienes sugerencias o mejoras, no dudes en hacer un fork de este repositorio. Aquí hay algunas pautas:
 
-1. Crea una nueva rama (`git checkout -b feature/nueva_caracteristica`).
-2. Realiza tus cambios.
-3. Haz commit de tus cambios (`git commit -m 'Añadiendo una nueva característica'`).
-4. Haz push a la rama (`git push origin feature/nueva_caracteristica`).
-5. Crea un nuevo Pull Request.
 
->>>>>>> 1fdcfeebd8bdda935c40a9e6b3215e347041510a
