@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
+import dotenv from 'dotenv';
+dotenv.config();
+
 import mongoose from 'mongoose';
-import Product from './models/Product';
-
-require('dotenv').config(); // Cargar variables de entorno
-
+import Product from './models/Product.js';
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
