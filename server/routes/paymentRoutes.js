@@ -1,5 +1,10 @@
-const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Asegúrate de tener la clave secreta de Stripe
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);// Asegúrate de tener la clave secreta de Stripe
 const router = express.Router();
 
 // Endpoint para crear una sesión de pago
@@ -33,4 +38,4 @@ router.post('/checkout', async (req, res) => {
     }
 });
 
-module.exports = router;    
+export default router;    

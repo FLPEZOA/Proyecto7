@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +20,7 @@
     "mongoose": "^8.9.0",
     "openapi-backend": "^5.11.1",
     "react-router-dom": "^7.0.2",
+    "serverless-http": "^3.2.0",
     "stripe": "^17.5.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"

@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); // Para encriptar contraseñas
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -22,4 +21,4 @@ const UserSchema = new mongoose.Schema({
 }, { timestamps: true }); // Agrega timestamps para saber cuándo se creó y actualizó el usuario
 
 const User = mongoose.model('User', UserSchema);
-module.exports = User;
+export default User;

@@ -1,6 +1,7 @@
-const express = require('express');
-const Cart = require('../models/Cart');
-const auth = require('../middleware/authMiddleware'); // Middleware de autenticación
+import express from 'express';
+import Cart from "../models/Cart.js";
+import auth from "../middleware/authMiddleware.js"
+
 const router = express.Router();
 
 // Obtener carrito de un usuario
@@ -43,4 +44,4 @@ router.post('/remove', auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

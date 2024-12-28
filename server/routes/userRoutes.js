@@ -1,8 +1,8 @@
-const express = require('express');
-const User = require('../models/User'); // Asegúrate de que este modelo esté correctamente definido
-const bcrypt = require('bcrypt'); // Para hash de contraseñas
-const jwt = require('jsonwebtoken'); // Para la creación de tokens
-const auth = require('../middleware/authMiddleware'); // Middleware de autenticación
+import express from 'express';
+import User from '../models/User.js'; // Asegúrate de que este modelo esté correctamente definido
+import bcrypt from 'bcrypt'; // Para hash de contraseñas
+import jwt from 'jsonwebtoken'; // Para la creación de tokens
+import auth from '../middleware/authMiddleware.js'; // Middleware de autenticación
 const router = express.Router();
 
 // Registro de un nuevo usuario
@@ -75,4 +75,4 @@ router.get('/profile', auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
